@@ -1,4 +1,4 @@
-import { FC, memo, useState } from "react";
+import { FC, memo, useCallback, useState } from "react";
 
 type Props = {
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -12,14 +12,14 @@ const Child: FC<Props> = memo(({ handleClick }) => {
 export const App = () => {
   console.log("render App");
   const [count, setCount] = useState(0);
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     console.log("test");
-  };
+  }, []);
 
   return (
     <>
       <p>Counter: {count}</p>
-      <button onClick={() => setCount(count + 1)}></button>
+      <button onClick={() => setCount(count + 1)}>count</button>
       <Child handleClick={handleClick} />
     </>
   );
